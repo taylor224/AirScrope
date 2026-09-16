@@ -7,6 +7,7 @@ python3 scripts/update-vendors.py
 swift test
 zsh scripts/build.sh release
 codesign --verify --strict build/AirScope.app
+zsh scripts/package-release.sh
 ```
 
 The Swift Testing suite covers:
@@ -35,5 +36,6 @@ UI and device behavior should be checked separately from the automated suite:
 - Export dialogs and the contents of files produced by the sample mode.
 
 A successful build or unit-test run does not certify all hardware, locale,
-appearance, or location-permission combinations. App Store packaging, notarization,
-and distribution signing are outside this repository's automated checks.
+appearance, or location-permission combinations. Release packaging verifies both
+CPU architectures and the code signature after extracting the ZIP. App Store
+packaging, notarization, and Developer ID signing are outside the automated checks.
