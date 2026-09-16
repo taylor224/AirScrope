@@ -1,3 +1,11 @@
+## What's changed
+
+- On launch, AirScope fits the window height to the overview without changing
+  its width or leaving excess space below the content. The height is capped to
+  the available display area; smaller displays retain scrolling. Manual resizing
+  still works.
+- The English and Korean READMEs include screenshots captured with sample data.
+
 ## Download
 
 Download `AirScope-<version>-macOS-universal.zip` from the assets below, extract

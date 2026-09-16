@@ -29,6 +29,9 @@ Hardware discovery and location authorization need a supported physical Mac.
 UI and device behavior should be checked separately from the automated suite:
 
 - Initial location authorization, denied access, and Wi-Fi disabled states.
+- First launch and relaunch fit the overview height without widening the window
+  or leaving excess space below the content. Manual resizing stays unchanged
+  across scans and tab changes; shorter screens scroll.
 - Adapter selection and scan settings while automatic measurements update.
 - Search, sorting, selection, measurement explanations, and raw-data inspection.
 - Workspace save/reopen, historical timelines, and return to live scanning.

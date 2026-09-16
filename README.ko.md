@@ -6,6 +6,25 @@
 
 SwiftUI로 만든 네이티브 앱이며, Apple의 공개 CoreWLAN API를 사용합니다. 외부 Swift 패키지 의존성은 없습니다.
 
+## 스크린샷
+
+앱의 샘플 모드에서 직접 촬영했습니다. 화면의 네트워크 이름·주소·측정값은 모두 합성 데이터입니다.
+
+![라이트 모드 개요: 신호 지표, 채널 분포, 신호 분석](docs/screenshots/overview-light.jpg)
+
+<details>
+<summary>다크 모드 주변 네트워크·원시 데이터 보기</summary>
+
+### 주변 네트워크
+
+![제조사, RSSI, Noise, SNR, 채널, 보안을 보여주는 주변 네트워크 목록](docs/screenshots/networks-dark.jpg)
+
+### 원시 데이터
+
+![RSN 보안 해석과 원시 Hex 바이트를 펼친 Information Element 화면](docs/screenshots/raw-data-dark.jpg)
+
+</details>
+
 ## 주요 기능
 
 | 기능 | 설명 |
@@ -64,6 +83,10 @@ open build/AirScope.app --args --demo
 기본 빌드는 로컬 개발용 ad-hoc 서명을 사용합니다. 다시 빌드하면 위치 권한을 재요청할 수 있습니다. 배포용 서명은 `CODESIGN_IDENTITY`로 지정할 수 있으며, Developer ID 인증서와 notarization은 별도로 준비해야 합니다. 공개 소스에는 인증서·개인 서명 정보가 없습니다.
 
 ## 사용 방법
+
+앱을 열면 가로 폭을 유지하면서 개요 내용이 들어갈 만큼만 세로 높이를 맞춥니다.
+화면 높이가 부족한 경우 화면 안에 창을 배치하고 스크롤을 유지합니다.
+실행 후에는 창 크기를 자유롭게 조절할 수 있습니다.
 
 1. **주변 네트워크**에서 AP를 선택합니다. 선택은 개요·이력·원시 데이터 화면에 반영됩니다.
 2. RSSI·Noise·SNR 등의 **ⓘ** 버튼에서 지표의 의미를 확인합니다.

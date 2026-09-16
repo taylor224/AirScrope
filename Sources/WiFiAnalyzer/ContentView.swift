@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var settingsInterface: String?
     @State private var settingsInterval = 10.0
     @State private var settingsHidden = true
+    @State private var initialWindowOverflow: CGFloat?
     @State private var sortOrder = [KeyPathComparator(\NetworkRecord.rssi, order: .reverse)]
     var body: some View {
         VStack(spacing: 0) {
@@ -43,6 +44,8 @@ struct ContentView: View {
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             statusBar
         }.background(Theme.canvas).foregroundStyle(Theme.ink).tint(Theme.blue)
+            .background(InitialWindowHeight(overflow: initialWindowOverflow))
+            .onPreferenceChange(OverviewOverflowKey.self) { initialWindowOverflow = $0 }
             .sheet(isPresented: $showSettings) {
                 SettingsView(interfaces: settingsInterfaces, currentInterface: settingsInterface, interval: settingsInterval, hidden: settingsHidden) { name, interval, hidden in
                     let changed = store.interfaceName != name
@@ -131,36 +134,47 @@ struct ContentView: View {
         }.padding(.horizontal, 40).padding(.vertical, 12).background(Theme.pearl)
     }
     private var overview: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                hero
-                VStack(alignment: .leading, spacing: 24) {
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(L("채널 분포")).font(.system(size: 34, weight: .semibold)).tracking(-0.37)
-                            Text(L("주변 AP가 사용하는 주파수와 신호 세기를 함께 살펴보세요."))
-                                .font(.system(size: 17)).foregroundStyle(Theme.darkMuted)
-                        }
-                        Spacer()
-                        Button { page = .networks } label: { Label(L("네트워크 보기"), systemImage: "chevron.right") }
-                            .buttonStyle(LinkButton(onDark: true)).font(.system(size: 14)).padding(.top, 12)
+        GeometryReader { viewport in
+            ScrollView {
+                overviewContent.background {
+                    GeometryReader { content in
+                        Color.clear.preference(key: OverviewOverflowKey.self,
+                            value: content.size.height > 0 && viewport.size.height > 0
+                                ? content.size.height - viewport.size.height : nil)
                     }
-                    SpectrumView(networks: store.networks, selectedID: $store.selectedID)
-                        .frame(height: 260)
-                }.padding(.vertical, 40).pageContent().foregroundStyle(.white).background(Theme.dark)
-                VStack(alignment: .leading, spacing: 24) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(L("신호 분석")).font(.system(size: 34, weight: .semibold)).tracking(-0.37)
-                            Text(L("선택한 네트워크의 측정값을 바탕으로 분석합니다.")).font(.system(size: 17)).foregroundStyle(Theme.muted)
-                        }
-                        Spacer()
-                        Button(L("상세 정보 보기")) { showDetails = true }.buttonStyle(PillButton()).disabled(store.selected == nil)
+                }
+            }.scrollIndicators(.hidden)
+        }
+    }
+    private var overviewContent: some View {
+        VStack(spacing: 0) {
+            hero
+            VStack(alignment: .leading, spacing: 24) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(L("채널 분포")).font(.system(size: 34, weight: .semibold)).tracking(-0.37)
+                        Text(L("주변 AP가 사용하는 주파수와 신호 세기를 함께 살펴보세요."))
+                            .font(.system(size: 17)).foregroundStyle(Theme.darkMuted)
                     }
-                    InsightsView(network: store.selected, networks: store.networks, history: store.history)
-                }.padding(.vertical, 48).pageContent().background(Theme.parchment)
-            }
-        }.scrollIndicators(.hidden)
+                    Spacer()
+                    Button { page = .networks } label: { Label(L("네트워크 보기"), systemImage: "chevron.right") }
+                        .buttonStyle(LinkButton(onDark: true)).font(.system(size: 14)).padding(.top, 12)
+                }
+                SpectrumView(networks: store.networks, selectedID: $store.selectedID)
+                    .frame(height: 260)
+            }.padding(.vertical, 40).pageContent().foregroundStyle(.white).background(Theme.dark)
+            VStack(alignment: .leading, spacing: 24) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(L("신호 분석")).font(.system(size: 34, weight: .semibold)).tracking(-0.37)
+                        Text(L("선택한 네트워크의 측정값을 바탕으로 분석합니다.")).font(.system(size: 17)).foregroundStyle(Theme.muted)
+                    }
+                    Spacer()
+                    Button(L("상세 정보 보기")) { showDetails = true }.buttonStyle(PillButton()).disabled(store.selected == nil)
+                }
+                InsightsView(network: store.selected, networks: store.networks, history: store.history)
+            }.padding(.vertical, 48).pageContent().background(Theme.parchment)
+        }
     }
     private var hero: some View {
         VStack(spacing: 28) {

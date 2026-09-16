@@ -9,6 +9,26 @@ explore the raw wireless data available from your Mac.
 AirScope is a native SwiftUI app built on Apple's public CoreWLAN API, with no
 external Swift package dependencies.
 
+## Screenshots
+
+Captured from the app in sample mode. All network identifiers and measurements
+shown here are synthetic.
+
+![AirScope overview in light mode, showing signal metrics, channel distribution, and analysis](docs/screenshots/overview-light.jpg)
+
+<details>
+<summary>Nearby networks and raw data in dark mode</summary>
+
+### Nearby networks
+
+![Nearby network list with manufacturer, RSSI, noise, SNR, channel, and security columns](docs/screenshots/networks-dark.jpg)
+
+### Raw data
+
+![Raw information elements with expanded RSN security details and hexadecimal bytes](docs/screenshots/raw-data-dark.jpg)
+
+</details>
+
 ## Download
 
 Get the latest app from **[GitHub Releases](https://github.com/taylor224/AirScrope/releases/latest)**.
@@ -69,6 +89,11 @@ notarization must be arranged separately. No signing credentials are included in
 the repository or required by the release workflow.
 
 ## Using AirScope
+
+On launch, the window keeps its width and adjusts its height to fit the overview
+without excess space below the content. If the display is too short, the window
+stays within the available screen area and the overview scrolls. You can still
+resize the window manually.
 
 1. Select an AP in **Nearby Networks**. The selection is shared across the overview, history, and raw-data views.
 2. Use the **ⓘ** buttons beside metrics such as RSSI, noise, and SNR to see their meaning.
