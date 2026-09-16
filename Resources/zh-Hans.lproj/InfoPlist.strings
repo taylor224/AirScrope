@@ -1,0 +1,2 @@
+"NSLocationUsageDescription" = "读取附近 Wi-Fi 的名称（SSID）和接入点地址（BSSID）需要位置权限。应用不会收集或保存位置坐标。";
+"NSLocationWhenInUseUsageDescription" = "读取附近 Wi-Fi 的名称（SSID）和接入点地址（BSSID）需要位置权限。应用不会收集或保存位置坐标。";

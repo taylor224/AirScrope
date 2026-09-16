@@ -1,0 +1,2 @@
+"NSLocationUsageDescription" = "Location access is needed to read nearby Wi-Fi names (SSIDs) and access point addresses (BSSIDs). Location coordinates are not collected or stored.";
+"NSLocationWhenInUseUsageDescription" = "Location access is needed to read nearby Wi-Fi names (SSIDs) and access point addresses (BSSIDs). Location coordinates are not collected or stored.";

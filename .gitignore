@@ -1,0 +1,50 @@
+# Build products, developer state, and local verification files
+.build/
+build/
+.swiftpm/
+DerivedData/
+.DS_Store
+*.xcuserstate
+xcuserdata/
+*.dSYM/
+*.app/
+*.ipa
+*.dmg
+*.pkg
+
+# Captures, exports, saved workspaces, and device diagnostics
+captures/
+exports/
+workspaces/
+Workspaces/
+private/
+local/
+*.pcap
+*.pcapng
+*.cap
+*.log
+*.ips
+*.trace
+*.csv
+*.json
+*.jsonl
+*.sqlite*
+*.db
+
+# Credentials, signing material, and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.mobileprovision
+*.provisionprofile
+*.keychain*
+
+# Local third-party design reference (not redistributed)
+/DESIGN.md
+
+# Generated public IEEE dataset: fetched at build time, not licensed as project code
+/Sources/WiFiCore/Resources/manufacturers.json*

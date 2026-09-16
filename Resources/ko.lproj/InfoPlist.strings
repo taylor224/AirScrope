@@ -1,0 +1,2 @@
+"NSLocationUsageDescription" = "주변 Wi-Fi의 이름(SSID)과 AP 주소(BSSID)를 분석하려면 위치 권한이 필요합니다. 위치 좌표는 수집하거나 저장하지 않습니다.";
+"NSLocationWhenInUseUsageDescription" = "주변 Wi-Fi의 이름(SSID)과 AP 주소(BSSID)를 분석하려면 위치 권한이 필요합니다. 위치 좌표는 수집하거나 저장하지 않습니다.";
